@@ -1,4 +1,5 @@
 import webbrowser
+
 import streamlit as st
 import pickle
 import pandas as pd
@@ -30,15 +31,20 @@ if st.button(selected_recipe_name):
     webbrowser.open_new_tab(selected_recipe_url)
 st.image(selected_recipe_image_url, width=500)
 
+#st.write((recipes['URL'][recipes['TranslatedRecipeName'] == selected_recipe_name]).values[0])
+
 if st.button('Get recommendations'):
     st.title("Here are some recommendations for you!")
     recommendations,images, recipe_url = recommend(selected_recipe_name)
 
     for i in range(0,len(recommendations)):
-        if st.button(recommendations[i]):
-            webbrowser.open_new_tab(recipe_url[i])
+        # st.write(recommendations[i])
+        # st.markdown("[![Foo](" + images[i] + ")]("+ recipe_url[i]+ ")")
+        link = "[" + recommendations[i] + "](" + recipe_url[i] + ")"
+        st.markdown(link, unsafe_allow_html=True)
         st.image(images[i], width=300)
+        # if st.button(recommendations[i]):
+        #     webbrowser.open_new_tab(selected_recipe_url)
 
-
-
+        #st.image("https://www.archanaskitchen.com/images/archanaskitchen/1-Author/vidzworld-gmail.com/Bhindi_Masala_Recipe_-_Ladies_Finger_In_Tomato_Onion_Gravy_-4.jpg")
 
